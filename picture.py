@@ -1,5 +1,7 @@
-from PIL import Image, ImageDraw, ImageFont
-
+try:
+	from PIL import Image, ImageDraw, ImageFont, ImageEnhance
+except ImportError:
+	print("please import pillow")
 """ Barrowed function from a website eyesopen.com """
 def add_logo(mfname, lfname):
 	# resize logo
@@ -17,12 +19,12 @@ def add_logo(mfname, lfname):
 	mfname.paste(simage,box)
 
 # open the images.
-im = Image.open("image.jpg")
-crop = Image.open("kani_croped.jpeg")
+image = Image.open("image.jpg")
+logo = Image.open("kani_croped.jpg")
 
 # get width and height of the first image. 
-width, height = im.size
-d = ImageDraw.Draw(im)
+width, height = image.size
+d = ImageDraw.Draw(image)
 text = "Kani Center"
 
 # add a font to for the text.
@@ -34,8 +36,10 @@ margin = 350
 x = width - textwidth - margin
 y = height - textheight - margin
 
+enhancer = ImageEnhance.Brightness(logo)
+logo = enhancer.enhance(0.4)
 # draw watermark in the bottom right corner
-d.text((x,y), text, font=font, fill=(255,0,0,255))
-add_logo(im, crop)
+d.text((x,y), text, font=font, fill=(255,255,255,128))
+add_logo(image, logo)
 
-im.show()
+image.show()
