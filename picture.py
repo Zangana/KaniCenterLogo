@@ -20,7 +20,7 @@ def add_logo(mfname, lfname):
 
 # open the images.
 image = Image.open("image.jpg")
-logo = Image.open("kani_croped.jpg")
+logo = Image.open("kani_croped.jpeg")
 
 # get width and height of the first image. 
 width, height = image.size
